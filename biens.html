@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tous nos Biens Immobiliers | Votre Agence</title>
+    
+    <style>
+        /* --- DESIGN GLOBAL & VARIABLES --- */
+        :root {
+            --primary-color: #6a1a21; /* Le bordeaux de votre logo */
+            --secondary-color: #f8f9fa;
+            --text-dark: #2d3436;
+            --text-light: #636e72;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* --- EN-TÊTE DE LA PAGE --- */
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--white);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .breadcrumb {
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+        }
+
+        /* --- FILTRES (Optionnel mais moderne) --- */
+        .filters-container {
+            max-width: 1200px;
+            margin: -30px auto 40px;
+            background: var(--white);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .filter-group select {
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            min-width: 150px;
+        }
+
+        /* --- GRILLE DES BIENS --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        /* --- CARTE IMMOBILIÈRE --- */
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-image {
+            position: relative;
+            height: 230px;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .price-tag {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: var(--primary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-content h3 {
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .location {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .feature-item strong {
+            color: var(--text-dark);
+            font-size: 1rem;
+        }
+
+        /* --- BOUTON CONTACT --- */
+        .btn-detail {
+            display: block;
+            text-align: center;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            margin-top: 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .btn-detail:hover {
+            background: #4e1218;
+        }
+        .type-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--primary-color);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Animation douce pour le bouton "Visite" */
+.btn-detail {
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.btn-detail:hover {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+        @media (max-width: 768px) {
+            .properties-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="page-header">
+        <h1>Notre Catalogue Immobilier</h1>
+        <div class="breadcrumb">
+            <a href="index.html">Accueil</a> / <span>Tous nos biens</span>
+        </div>
+    </header>
+
+    <section class="filters-container">
+        <div class="filter-group">
+            <select>
+                <option>Localisation (Tout Abidjan)</option>
+                <option>Marcory</option>
+                <option>Bingerville</option>
+                <option>Cocody</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <select>
+                <option>Type de bien</option>
+                <option>Appartement</option>
+                <option>Villa</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <select>
+                <option>Budget Max</option>
+                <option>500.000 FCFA</option>
+                <option>1.000.000 FCFA</option>
+            </select>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="properties-grid">
+            
+            <div class="card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" alt="Bien">
+                    <div class="price-tag">450.000 FCFA / mois</div>
+                </div>
+                <div class="card-content">
+                    <h3>Résidence Prestige</h3>
+                    <p class="location">📍 Marcory Zone 4, Abidjan</p>
+                    <div class="features">
+                        <div class="feature-item">Pièces <strong>3</strong></div>
+                        <div class="feature-item">Surface <strong>120m²</strong></div>
+                        <div class="feature-item">Douches <strong>2</strong></div>
+                    </div>
+                    <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-image">
+                    <img src="gallery8.jpeg" alt="Bien">
+                    <div class="price-tag">800.000 FCFA / mois</div>
+                </div>
+                <div class="card-content">
+                    <h3>Villa Moderne Bingerville</h3>
+                    <p class="location">📍 Bingerville, Cité Feh Kessé</p>
+                    <div class="features">
+                        <div class="feature-item">Pièces <strong>5</strong></div>
+                        <div class="feature-item">Surface <strong>250m²</strong></div>
+                        <div class="feature-item">Garage <strong>2</strong></div>
+                    </div>
+                    <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+                </div>
+            </div>
+            <div class="card">
+        <div class="card-image">
+            <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80" alt="Villa Bingerville">
+            <div class="price-tag">1.200.000 FCFA / mois</div>
+            <span class="type-badge">Villa Basse</span>
+        </div>
+        <div class="card-content">
+            <h3>Villa Oasis - Bingerville</h3>
+            <p class="location">📍 Cité Lauriers, Bingerville</p>
+            <div class="features">
+                <div class="feature-item">Pièces <strong>5</strong></div>
+                <div class="feature-item">Jardin <strong>Oui</strong></div>
+                <div class="feature-item">Garage <strong>2</strong></div>
+            </div>
+            <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-image">
+            <img src="gallery23.jpeg" alt="Villa Angré">
+            <div class="price-tag">1.500.000 FCFA / mois</div>
+            <span class="type-badge">Duplex</span>
+        </div>
+        <div class="card-content">
+            <h3>Duplex de Luxe Angré</h3>
+            <p class="location">📍 Cocody Angré 7ème Tranche</p>
+            <div class="features">
+                <div class="feature-item">Pièces <strong>6</strong></div>
+                <div class="feature-item">Piscine <strong>Oui</strong></div>
+                <div class="feature-item">Surface <strong>400m²</strong></div>
+            </div>
+            <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-image">
+            <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80" alt="Villa Assinie">
+            <div class="price-tag">300.000 FCFA / nuit</div>
+            <span class="type-badge">Bord de mer</span>
+        </div>
+        <div class="card-content">
+            <h3>Villa Serena - Assinie</h3>
+            <p class="location">📍 Assinie-Mafia, Km 12</p>
+            <div class="features">
+                <div class="feature-item">Chambres <strong>4</strong></div>
+                <div class="feature-item">Terrasse <strong>100m²</strong></div>
+                <div class="feature-item">Staff <strong>Inclus</strong></div>
+            </div>
+            <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+        </div>
+    </div>
+    <div class="card">
+    <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80" alt="Villa Riviera Golf">
+        <div class="price-tag">2.500.000 FCFA / mois</div>
+        <span class="type-badge">Haut Standing</span>
+    </div>
+    <div class="card-content">
+        <h3>Villa Golf Prestige</h3>
+        <p class="location">📍 Riviera Golf, Cocody</p>
+        <div class="features">
+            <div class="feature-item">Pièces <strong>7</strong></div>
+            <div class="feature-item">Piscine <strong>Oui</strong></div>
+            <div class="feature-item">Sécurité <strong>24h/7</strong></div>
+        </div>
+        <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=800&q=80" alt="Villa Bassam">
+        <div class="price-tag">250.000 FCFA / nuit</div>
+        <span class="type-badge">Vacances</span>
+    </div>
+    <div class="card-content">
+        <h3>Villa Azur - Bassam</h3>
+        <p class="location">📍 Quartier France, Grand-Bassam</p>
+        <div class="features">
+            <div class="feature-item">Chambres <strong>4</strong></div>
+            <div class="feature-item">Vue <strong>Mer</strong></div>
+            <div class="feature-item">Parking <strong>3 pl.</strong></div>
+        </div>
+        <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+    </div>
+</div>
+<div class="card">
+    <div class="card-image">
+        <img src="gallery7.jpeg" alt="Villa Songon">
+        <div class="price-tag">900.000 FCFA / mois</div>
+        <span class="type-badge">Villa Basse</span>
+    </div>
+    <div class="card-content">
+        <h3>Villa Nature - Songon</h3>
+        <p class="location">📍 Songon Park, Abidjan</p>
+        <div class="features">
+            <div class="feature-item">Pièces <strong>4</strong></div>
+            <div class="feature-item">Jardin <strong>500m²</strong></div>
+            <div class="feature-item">Calme <strong>100%</strong></div>
+        </div>
+        <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-image">
+        <img src="gallery25.jpeg" alt="Villa Dokui">
+        <div class="price-tag">750.000 FCFA / mois</div>
+        <span class="type-badge">Duplex</span>
+    </div>
+    <div class="card-content">
+        <h3>Duplex Familial Dokui</h3>
+        <p class="location">📍 Plateau Dokui, Abidjan</p>
+        <div class="features">
+            <div class="feature-item">Pièces <strong>5</strong></div>
+            <div class="feature-item">Garage <strong>1</strong></div>
+            <div class="feature-item">Balcon <strong>Oui</strong></div>
+        </div>
+        <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-image">
+        <img src="gallery17.jpeg" alt="Villa Palmerais">
+        <div class="price-tag">1.100.000 FCFA / mois</div>
+        <span class="type-badge">Moderne</span>
+    </div>
+    <div class="card-content">
+        <h3>Résidence Palmeraie</h3>
+        <p class="location">📍 Riviera Palmeraie, Cocody</p>
+        <div class="features">
+            <div class="feature-item">Pièces <strong>6</strong></div>
+            <div class="feature-item">Surface <strong>300m²</strong></div>
+            <div class="feature-item">Cuisine <strong>Équipée</strong></div>
+        </div>
+        <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+    </div>
+</div>
+<div class="card">
+    <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=80" alt="Villa Ambassades">
+        <div class="price-tag">3.500.000 FCFA / mois</div>
+        <span class="type-badge">Palais Privé</span>
+    </div>
+    <div class="card-content">
+        <h3>Résidence des Ambassades</h3>
+        <p class="location">📍 Cocody Ambassades, Abidjan</p>
+        <div class="features">
+            <div class="feature-item">Pièces <strong>10</strong></div>
+            <div class="feature-item">Piscine <strong>Olympique</strong></div>
+            <div class="feature-item">Jardin <strong>2000m²</strong></div>
+        </div>
+        <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80" alt="Villa Assinie Luxe">
+        <div class="price-tag">500.000 FCFA / nuit</div>
+        <span class="type-badge">Bord de Lagune</span>
+    </div>
+    <div class="card-content">
+        <h3>Villa L'Horizon - Assinie</h3>
+        <p class="location">📍 Assinie-Mafia, Secteur Terminal</p>
+        <div class="features">
+            <div class="feature-item">Chambres <strong>6</strong></div>
+            <div class="feature-item">Ponton <strong>Privé</strong></div>
+            <div class="feature-item">Staff <strong>Complet</strong></div>
+        </div>
+        <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+    </div>
+</div>
+<div class="card">
+        <div class="card-image">
+            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80" alt="Appartement Plateau">
+            <div class="price-tag">800.000 FCFA / mois</div>
+            <span class="type-badge">Standing</span>
+        </div>
+        <div class="card-content">
+            <h3>Appartement Le Panoramique</h3>
+            <p class="location">📍 Le Plateau, Centre Affaires</p>
+            <div class="features">
+                <div class="feature-item">Pièces <strong>3</strong></div>
+                <div class="feature-item">Étage <strong>12ème</strong></div>
+                <div class="feature-item">Parking <strong>Souterrain</strong></div>
+            </div>
+            <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-image">
+            <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80" alt="Appartement Zone 4">
+            <div class="price-tag">1.200.000 FCFA / mois</div>
+            <span class="type-badge">Luxe</span>
+        </div>
+        <div class="card-content">
+            <h3>Appartement Jardin d'Orient</h3>
+            <p class="location">📍 Marcory Zone 4, Abidjan</p>
+            <div class="features">
+                <div class="feature-item">Pièces <strong>4</strong></div>
+                <div class="feature-item">Meublé <strong>Oui</strong></div>
+                <div class="feature-item">Sécurité <strong>24h/7</strong></div>
+            </div>
+            <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-image">
+            <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=800&q=80" alt="Appartement Angré">
+            <div class="price-tag">350.000 FCFA / mois</div>
+            <span class="type-badge">Familial</span>
+        </div>
+        <div class="card-content">
+            <h3>Résidence Les Arcades</h3>
+            <p class="location">📍 Cocody Angré 8ème Tranche</p>
+            <div class="features">
+                <div class="feature-item">Pièces <strong>3</strong></div>
+                <div class="feature-item">Surface <strong>90m²</strong></div>
+                <div class="feature-item">Balcon <strong>Oui</strong></div>
+            </div>
+            <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-image">
+            <img src="gallery18.jpeg" alt="Appartement Palmeraie">
+            <div class="price-tag">500.000 FCFA / mois</div>
+            <span class="type-badge">Récent</span>
+        </div>
+        <div class="card-content">
+            <h3>Studio Américain Palmeraie</h3>
+            <p class="location">📍 Riviera Palmeraie, Abidjan</p>
+            <div class="features">
+                <div class="feature-item">Pièces <strong>2</strong></div>
+                <div class="feature-item">Cuisine <strong>Équipée</strong></div>
+                <div class="feature-item">Clim <strong>Inclus</strong></div>
+            </div>
+            <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-image">
+            <img src="gallery16.jpeg" alt="Appartement Faya">
+            <div class="price-tag">400.000 FCFA / mois</div>
+            <span class="type-badge">Neuf</span>
+        </div>
+        <div class="card-content">
+            <h3>Résidence Belle Vue</h3>
+            <p class="location">📍 Riviera Faya, Route Bassam</p>
+            <div class="features">
+                <div class="feature-item">Pièces <strong>3</strong></div>
+                <div class="feature-item">Garage <strong>1 pl.</strong></div>
+                <div class="feature-item">Ascenseur <strong>Oui</strong></div>
+            </div>
+            <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-image">
+            <img src="gallery19.jpeg" alt="Appartement Luxe">
+            <div class="price-tag">2.000.000 FCFA / mois</div>
+            <span class="type-badge">Penthouse</span>
+        </div>
+        <div class="card-content">
+            <h3>Penthouse Royale</h3>
+            <p class="location">📍 Cocody Ambassades</p>
+            <div class="features">
+                <div class="feature-item">Pièces <strong>5</strong></div>
+                <div class="feature-item">Terrasse <strong>Privée</strong></div>
+                <div class="feature-item">Piscine <strong>Commune</strong></div>
+            </div>
+            <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-image">
+            <img src="gallery15.jpeg" alt="Appartement Koumassi">
+            <div class="price-tag">300.000 FCFA / mois</div>
+            <span class="type-badge">Économique</span>
+        </div>
+        <div class="card-content">
+            <h3>Appartement Proximité Lagune</h3>
+            <p class="location">📍 Koumassi 32</p>
+            <div class="features">
+                <div class="feature-item">Pièces <strong>3</strong></div>
+                <div class="feature-item">Surface <strong>85m²</strong></div>
+                <div class="feature-item">Eau <strong>Forage</strong></div>
+            </div>
+            <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-image">
+            <img src="gallery14.jpeg"Appartement Bingerville">
+            <div class="price-tag">250.000 FCFA / mois</div>
+            <span class="type-badge">Calme</span>
+        </div>
+        <div class="card-content">
+            <h3>Cité de la Paix</h3>
+            <p class="location">📍 Bingerville, Nouveau Quartier</p>
+            <div class="features">
+                <div class="feature-item">Pièces <strong>3</strong></div>
+                <div class="feature-item">Jardin <strong>Commun</strong></div>
+                <div class="feature-item">Cadre <strong>Vert</strong></div>
+            </div>
+            <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-image">
+            <img src="gallery12.jpeg" alt="Appartement Marcory Central">
+            <div class="price-tag">450.000 FCFA / mois</div>
+            <span class="type-badge">Central</span>
+        </div>
+        <div class="card-content">
+            <h3>Appartement Central Marcory</h3>
+            <p class="location">📍 Marcory Résidentiel</p>
+            <div class="features">
+                <div class="feature-item">Pièces <strong>3</strong></div>
+                <div class="feature-item">Accès <strong>Aisé</strong></div>
+                <div class="feature-item">Sécurité <strong>Garde</strong></div>
+            </div>
+            <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-image">
+            <img src="gallery10.jpeg" alt="Appartement Design">
+            <div class="price-tag">950.000 FCFA / mois</div>
+            <span class="type-badge">Premium</span>
+        </div>
+        <div class="card-content">
+            <h3>Résidence Vallon Design</h3>
+            <p class="location">📍 Cocody Deux Plateaux Vallon</p>
+            <div class="features">
+                <div class="feature-item">Pièces <strong>4</strong></div>
+                <div class="feature-item">Smart <strong>Home</strong></div>
+                <div class="feature-item">Piscine <strong>Oui</strong></div>
+            </div>
+            <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-image">
+            <img src="gallery22.jpeg" alt="Loft Zone 4">
+            <div class="price-tag">1.100.000 FCFA / mois</div>
+            <span class="type-badge">Loft</span>
+        </div>
+        <div class="card-content">
+            <h3>Le Loft Industriel</h3>
+            <p class="location">📍 Marcory Zone 4C, Abidjan</p>
+            <div class="features">
+                <div class="feature-item">Pièces <strong>3</strong></div>
+                <div class="feature-item">Haut. Sous Plafond <strong>4m</strong></div>
+                <div class="feature-item">Style <strong>Moderne</strong></div>
+            </div>
+            <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-image">
+            <img src="gallery24.jpeg" alt="Appartement Riviera 3">
+            <div class="price-tag">1.800.000 FCFA / mois</div>
+            <span class="type-badge">Luxe</span>
+        </div>
+        <div class="card-content">
+            <h3>Résidence Laguna Bay</h3>
+            <p class="location">📍 Riviera 3, Cocody</p>
+            <div class="features">
+                <div class="feature-item">Pièces <strong>5</strong></div>
+                <div class="feature-item">Vue <strong>Lagune</strong></div>
+                <div class="feature-item">Sécurité <strong>Elite</strong></div>
+            </div>
+            <a href="https://wa.me/22500777806995" class="btn-detail">Contactez-nous</a>
+        </div>
+    </div>
+
+
+            </div>
+    </main>
+
+</body>
+</html>
