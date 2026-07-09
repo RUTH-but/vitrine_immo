@@ -1,20 +1,23 @@
-
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Georgia", serif;
 }
+html {
+    scroll-behavior: smooth;
+}
 body {
     color: #333;
     background: #fff;
+    min-width: 100%;
 }
 a {
     text-decoration: none;
 }
 .header {
     width: 100%;
-    position: fixed; /* Reste en haut au défilement */
+    position: fixed; 
     top: 0;
     left: 0;
     z-index: 1000;
@@ -22,7 +25,7 @@ a {
 }
 .navbar {
     display: flex;
-    justify-content: space-between; /* Espace entre Logo --- Liens --- Bouton */
+    justify-content: space-between; 
     align-items: center;
     padding: 15px 6%;
     background-color: rgba(255, 255, 255, 0.95); /* Blanc légèrement transparent */
@@ -127,7 +130,7 @@ a {
 .a-propos h2::after {
     content: "";
     display: block;
-    width: 800px;
+    width: 500px;
     height: 2px;
     background-color: #5b0f1a;
     margin-top: 15px;
@@ -213,11 +216,11 @@ a {
 }
 .team-section {
     padding: 80px 5%;
-    background-color: #fcfcfc; /* Un fond très légèrement gris */
+    background-color: #fcfcfc; 
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Pour centrer la carte au milieu de l'écran */
+    min-height: 100vh; 
 }
 .service-links {
     padding: 60px 0;
@@ -297,7 +300,7 @@ a {
     width: 90%;
     margin: 15px auto;
     border: 0;
-    border-top: 1px solid #e0c9c9; /* Rouge très clair pour la ligne */
+    border-top: 1px solid #e0c9c9;
 }
 
 /* --- Les Liens de Contact --- */
@@ -314,12 +317,12 @@ a {
     align-items: center;
     gap: 12px;
     text-decoration: none;
-    color: #8c2a38; /* Ton rouge */
+    color: #8c2a38; 
     font-size: 0.95rem;
 }
 
 .contact-link:hover {
-    color: #2c3e50; /* Changement au survol */
+    color: #2c3e50; 
 }
 
 /* --- Les Boutons d'Action en Bas --- */
@@ -528,16 +531,16 @@ a[href^="mailto:"] {
     100%{transform: translateY(0);}
 }
 .icon-link {
-    display: flex; /* Indispensable pour centrer l'icône */
+    display: flex; 
     align-items: center;
     justify-content: center;
     width: 50px;
     height: 50px;
-    background-color: #6B3A4A; /* Votre couleur bordeaux */
+    background-color: #6B3A4A;
     color: #ffffff;
     border-radius: 50%;
-    text-decoration: none; /* Enlève le soulignement moche du lien */
-    cursor: pointer; /* Affiche la petite main au survol */
+    text-decoration: none; 
+    cursor: pointer;
 }
 @media (max-width:1024px) {
     .menu{
@@ -645,23 +648,35 @@ a[href^="mailto:"] {
         padding: 5px 10px !important;
     }
     .a-propos {
-        padding: 30px 15px !important; /* Donne de l'espace interne sans étouffer */
-        text-align: center !important;  /* Centre tout le texte sur mobile */
+        padding: 30px 15px !important;
+        text-align: center !important;  
         width: 100% !important;
         box-sizing: border-box !important;
     }
 
     .a-propos h2 {
-        font-size: 1.6rem !important;   /* Réduit la taille du titre "À propos de nous" */
+        font-size: 1.6rem !important;   
         margin-bottom: 15px !important;
     }
 
     .a-propos p {
-        font-size: 0.95rem !important;  /* Rend le texte agréable à lire sur téléphone */
+        font-size: 0.95rem !important;  
         line-height: 1.6 !important;
-        text-align: justify !important; /* Aligne le texte proprement à gauche et à droite */
-        padding: 0 10px !important;     /* Évite que le texte colle aux bords de l'écran */
+        text-align: justify !important; 
+        padding: 0 10px !important;    
     }
     
-} /* <-- C'est cette accolade finale qui ferme le @media ! Si on l'oublie, ça crée des erreurs */
+} 
+@media (max-width: 768px) {
+    .header {
+        width: 100%;
+        left: 0;
+        right: 0;
+    }
+    .navbar {
+        flex-direction: column;
+        padding: 10px 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
 }
