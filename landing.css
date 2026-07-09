@@ -127,7 +127,7 @@ a {
 .a-propos h2::after {
     content: "";
     display: block;
-    width: 1020px;
+    width: 800px;
     height: 2px;
     background-color: #5b0f1a;
     margin-top: 15px;
@@ -628,4 +628,40 @@ a[href^="mailto:"] {
     }
 
     
+}
+@media (max-width: 768px) {
+    .service-links, nav, .navbar-links { 
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;    
+        gap: 15px !important;             
+        width: 100% !important;
+        padding: 10px 0 !important;
+    }
+    .service-links a, nav a, .navbar-links a {
+        font-size: 1.1rem !important;
+        width: auto !important;
+        text-align: center !important;
+        padding: 5px 10px !important;
+    }
+    .a-propos {
+        padding: 30px 15px !important; /* Donne de l'espace interne sans étouffer */
+        text-align: center !important;  /* Centre tout le texte sur mobile */
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .a-propos h2 {
+        font-size: 1.6rem !important;   /* Réduit la taille du titre "À propos de nous" */
+        margin-bottom: 15px !important;
+    }
+
+    .a-propos p {
+        font-size: 0.95rem !important;  /* Rend le texte agréable à lire sur téléphone */
+        line-height: 1.6 !important;
+        text-align: justify !important; /* Aligne le texte proprement à gauche et à droite */
+        padding: 0 10px !important;     /* Évite que le texte colle aux bords de l'écran */
+    }
+    
+} /* <-- C'est cette accolade finale qui ferme le @media ! Si on l'oublie, ça crée des erreurs */
 }
