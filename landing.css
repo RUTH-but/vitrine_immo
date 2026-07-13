@@ -690,7 +690,10 @@ a[href^="mailto:"] {
         display: flex;
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
-
-
+    }
+    .image-box, .card {
+        overflow-x: visible;
+        display: inline-block;
+        vertical-align: top;
     }
 }
