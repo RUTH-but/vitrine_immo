@@ -688,12 +688,18 @@ a[href^="mailto:"] {
     .properties-container, .image-box, .card{
         overflow-x: auto;
         display: flex;
-        white-space: nowrap;
+        flex-wrap: nowrap;
+        gap: 20px;
+        padding: 10px 15px;
         -webkit-overflow-scrolling: touch;
     }
-    .image-box, .card {
-        overflow-x: visible;
-        display: inline-block;
-        vertical-align: top;
+    .image-box {
+        display: block;
+    }
+    .card{
+        flex: 0 0 280px;
+        max-width: 280px;
+        display: block;
+
     }
 }
