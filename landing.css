@@ -634,36 +634,36 @@ a[href^="mailto:"] {
 }
 @media (max-width: 768px) {
     .service-links, nav, .navbar-links { 
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;    
-        gap: 15px !important;             
-        width: 100% !important;
-        padding: 10px 0 !important;
+        display: flex ;
+        flex-direction: column ;
+        align-items: center ;    
+        gap: 15px ;             
+        width: 100% ;
+        padding: 10px 0 ;
     }
     .service-links a, nav a, .navbar-links a {
-        font-size: 1.1rem !important;
-        width: auto !important;
-        text-align: center !important;
-        padding: 5px 10px !important;
+        font-size: 1.1rem ;
+        width: auto ;
+        text-align: center ;
+        padding: 5px 10px ;
     }
     .a-propos {
-        padding: 30px 15px !important;
-        text-align: center !important;  
-        width: 100% !important;
-        box-sizing: border-box !important;
+        padding: 30px 15px ;
+        text-align: center ;  
+        width: 100% ;
+        box-sizing: border-box;
     }
 
     .a-propos h2 {
-        font-size: 1.6rem !important;   
-        margin-bottom: 15px !important;
+        font-size: 1.6rem ;   
+        margin-bottom: 15px ;
     }
 
     .a-propos p {
-        font-size: 0.95rem !important;  
-        line-height: 1.6 !important;
-        text-align: justify !important; 
-        padding: 0 10px !important;    
+        font-size: 0.95rem ;  
+        line-height: 1.6;
+        text-align: justify ; 
+        padding: 0 10px ;    
     }
     
 } 
@@ -682,11 +682,15 @@ a[href^="mailto:"] {
 }
 @media (max-width: 768px) {
     * {
-        max-width: 100vw !important;
-        overflow-x: hidden !important;
+        max-width: 100vw ;
+        overflow-x: hidden ;
     }
     .properties-container, .image-box, .card{
         overflow-x: auto;
+        display: flex;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+
 
     }
 }
